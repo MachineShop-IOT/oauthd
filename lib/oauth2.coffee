@@ -84,7 +84,7 @@ class OAuth2 extends OAuthBase
 		request options, (e, r, body) =>
 			return callback e if e
 			responseParser = new OAuth2ResponseParser(r, body, headers["Accept"], 'refresh token')
-			responseParser.parse (err, response) ->
+			responseParser.parse (err, response) =>
 				return callback err if err
 
 				expire = @_getExpireParameter(response)

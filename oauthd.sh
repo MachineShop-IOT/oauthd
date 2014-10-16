@@ -14,7 +14,7 @@ start)
 		echo " OK"
 	fi
 	echo -n "Starting OAuth daemon."
-	forever --minUptime 1000 --spinSleepTime 1000 -a -l forever.log -o out.log -e err.log start lib/oauthd.js >/dev/null 2>/dev/null
+	forever --minUptime 1000 --spinSleepTime 1000 -a -l forever.log -o out.log -e err.log start -p /home/ubuntu/oauthd --pidFile /home/ubuntu/oauthd/oauthd.pid lib/oauthd.js >/dev/null 2>/dev/null
 	for i in {1..10}
 	do
 		sleep 1
@@ -49,7 +49,7 @@ restart)
 	$0 start
 ;;
 startsync)
-	forever --minUptime 1000 --spinSleepTime 1000 -a -l forever.log -o out.log -e err.log lib/oauthd.js
+	forever --pidFile oauth.pid --minUptime 1000 --spinSleepTime 1000 -a -l forever.log -o out.log -e err.log lib/oauthd.js
 ;;
 config)
 	if [ ! -f ./config.local.js ]; then
